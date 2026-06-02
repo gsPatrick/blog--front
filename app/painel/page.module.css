@@ -494,3 +494,24 @@
   .row { grid-template-columns: 1fr; }
   .section { padding: 22px; }
 }
+
+/* Formulário de edição inline (Revisão & publicação) */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--secondary);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 22px;
+}
+
+.editHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-space);
+  font-size: 1.05rem;
+}

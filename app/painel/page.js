@@ -11,7 +11,7 @@ import styles from './page.module.css'
 import {
   LayoutDashboard, Loader2, Lock, PenSquare, Sparkles, History,
   CheckCircle2, MessageSquare, Settings, Users as UsersIcon,
-  Check, X, Send, Archive, Plus, Power, Image as ImageIcon,
+  Check, X, Send, Archive, Plus, Power, Image as ImageIcon, Pencil, Save,
 } from 'lucide-react'
 
 // Mapa de status -> classe de badge
@@ -330,11 +330,100 @@ function GenerationsSection() {
   )
 }
 
+// Formulário inline para editar uma postagem existente (revisão/edição).
+function EditPostForm({ post, categories, onSaved, onCancel }) {
+  const [form, setForm] = useState({
+    title: post.title || '',
+    excerpt: post.excerpt || '',
+    categoryId: post.category?.id || post.categoryId || '',
+    tags: (post.tags || []).map((t) => (typeof t === 'string' ? t : t.name)).join(', '),
+    content: post.content || '',
+    status: post.status || 'draft',
+  })
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
+
+  const handleSave = async (e) => {
+    e.preventDefault()
+    setError('')
+    setSaving(true)
+    try {
+      await api.posts.update(post.id, {
+        title: form.title,
+        content: form.content,
+        status: form.status,
+        excerpt: form.excerpt || null,
+        categoryId: form.categoryId || null,
+        tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
+      })
+      await onSaved()
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'Erro ao salvar.')
+      setSaving(false)
+    }
+  }
+
+  return (
+    <form className={styles.editForm} onSubmit={handleSave}>
+      <div className={styles.editHead}>
+        <strong>Editando: {post.title}</strong>
+        <StatusBadge status={form.status} />
+      </div>
+      <div className={styles.formGroup}>
+        <label>Título</label>
+        <input className={styles.input} value={form.title} onChange={set('title')} required />
+      </div>
+      <div className={styles.formGroup}>
+        <label>Resumo</label>
+        <input className={styles.input} value={form.excerpt} onChange={set('excerpt')} />
+      </div>
+      <div className={styles.row}>
+        <div className={styles.formGroup}>
+          <label>Categoria</label>
+          <select className={styles.select} value={form.categoryId} onChange={set('categoryId')}>
+            <option value="">— sem categoria —</option>
+            {categories.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))}
+          </select>
+        </div>
+        <div className={styles.formGroup}>
+          <label>Status</label>
+          <select className={styles.select} value={form.status} onChange={set('status')}>
+            <option value="draft">Rascunho</option>
+            <option value="pending">Aguardando revisão</option>
+            <option value="published">Publicado</option>
+            <option value="archived">Arquivado</option>
+          </select>
+        </div>
+      </div>
+      <div className={styles.formGroup}>
+        <label>Tags (separadas por vírgula)</label>
+        <input className={styles.input} value={form.tags} onChange={set('tags')} />
+      </div>
+      <div className={styles.formGroup}>
+        <label>Conteúdo</label>
+        <textarea className={styles.textarea} value={form.content} onChange={set('content')} required />
+      </div>
+      {error && <div className={styles.error}>{error}</div>}
+      <div className={styles.btnRow}>
+        <button type="submit" className={styles.button} disabled={saving}>
+          {saving ? <><Loader2 size={16} className={styles.spinner} /> Salvando...</> : <><Save size={16} /> Salvar alterações</>}
+        </button>
+        <button type="button" className={`${styles.button} ${styles.buttonGhost}`} onClick={onCancel} disabled={saving}>
+          Cancelar
+        </button>
+      </div>
+    </form>
+  )
+}
+
 // ---------------------------------------------------------------------------
 // SEÇÃO: Revisão & publicação
 // ---------------------------------------------------------------------------
 function ReviewSection() {
   const [posts, setPosts] = useState([])
+  const [categories, setCategories] = useState([])
+  const [editing, setEditing] = useState(null) // post completo em edição
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(null)
@@ -343,11 +432,12 @@ function ReviewSection() {
     setLoading(true)
     setError('')
     try {
-      const [pending, drafts] = await Promise.all([
+      const [pending, drafts, published] = await Promise.all([
         api.posts.list({ status: 'pending', page: 1, limit: 50 }),
         api.posts.list({ status: 'draft', page: 1, limit: 50 }),
+        api.posts.list({ status: 'published', page: 1, limit: 50 }),
       ])
-      const merged = [...(pending.data || []), ...(drafts.data || [])]
+      const merged = [...(pending.data || []), ...(drafts.data || []), ...(published.data || [])]
       setPosts(merged)
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Erro ao carregar postagens.')
@@ -357,6 +447,24 @@ function ReviewSection() {
   }, [])
 
   useEffect(() => { load() }, [load])
+
+  useEffect(() => {
+    api.categories.list().then((d) => setCategories(d || [])).catch(() => {})
+  }, [])
+
+  // Abre o formulário de edição buscando o post completo (com conteúdo).
+  const openEdit = async (id) => {
+    setBusy(id)
+    setError('')
+    try {
+      const full = await api.posts.get(id)
+      setEditing(full)
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'Erro ao abrir edição.')
+    } finally {
+      setBusy(null)
+    }
+  }
 
   const act = async (id, fn) => {
     setBusy(id)
@@ -377,13 +485,21 @@ function ReviewSection() {
         <CheckCircle2 size={22} />
         <h2>Revisão & publicação</h2>
       </div>
-      <p className={styles.sectionDesc}>Postagens aguardando revisão e rascunhos prontos para publicar ou arquivar.</p>
+      <p className={styles.sectionDesc}>Rascunhos, postagens aguardando revisão e publicadas. Publique, arquive ou edite o conteúdo.</p>
 
       {error && <div className={styles.error}>{error}</div>}
+      {editing && (
+        <EditPostForm
+          post={editing}
+          categories={categories}
+          onCancel={() => setEditing(null)}
+          onSaved={async () => { setEditing(null); await load() }}
+        />
+      )}
       {loading ? (
         <p className={styles.inlineLoading}><Loader2 size={16} className={styles.spinner} /> Carregando...</p>
       ) : posts.length === 0 ? (
-        <p className={styles.empty}>Nenhuma postagem pendente.</p>
+        <p className={styles.empty}>Nenhuma postagem.</p>
       ) : (
         <div className={styles.list}>
           {posts.map((p) => (
@@ -399,19 +515,30 @@ function ReviewSection() {
               </div>
               <div className={styles.btnRow}>
                 <button
-                  className={`${styles.button} ${styles.btnSm}`}
+                  className={`${styles.button} ${styles.buttonGhost} ${styles.btnSm}`}
                   disabled={busy === p.id}
-                  onClick={() => act(p.id, api.posts.publish)}
+                  onClick={() => openEdit(p.id)}
                 >
-                  <Send size={15} /> Publicar
+                  <Pencil size={15} /> Editar
                 </button>
-                <button
-                  className={`${styles.button} ${styles.buttonDanger} ${styles.btnSm}`}
-                  disabled={busy === p.id}
-                  onClick={() => act(p.id, api.posts.archive)}
-                >
-                  <Archive size={15} /> Arquivar
-                </button>
+                {p.status !== 'published' && (
+                  <button
+                    className={`${styles.button} ${styles.btnSm}`}
+                    disabled={busy === p.id}
+                    onClick={() => act(p.id, api.posts.publish)}
+                  >
+                    <Send size={15} /> Publicar
+                  </button>
+                )}
+                {p.status !== 'archived' && (
+                  <button
+                    className={`${styles.button} ${styles.buttonDanger} ${styles.btnSm}`}
+                    disabled={busy === p.id}
+                    onClick={() => act(p.id, api.posts.archive)}
+                  >
+                    <Archive size={15} /> Arquivar
+                  </button>
+                )}
               </div>
             </div>
           ))}
@@ -512,13 +639,14 @@ function CommentsModerationSection() {
 // ---------------------------------------------------------------------------
 function AiConfigSection() {
   const [configs, setConfigs] = useState([])
+  const [providers, setProviders] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [busy, setBusy] = useState(null)
   const [submitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({
-    name: '', provider: 'openai', model: '', imageStrategy: 'none',
+    name: '', provider: '', model: '', imageStrategy: 'unsplash',
   })
 
   const load = useCallback(async () => {
@@ -536,7 +664,34 @@ function AiConfigSection() {
 
   useEffect(() => { load() }, [load])
 
+  // Carrega provedores + modelos disponíveis (fonte: documentação da API).
+  useEffect(() => {
+    api.ai.providers()
+      .then((list) => {
+        const arr = list || []
+        setProviders(arr)
+        setForm((f) => {
+          if (f.provider) return f
+          const first = arr[0]
+          return first
+            ? { ...f, provider: first.provider, model: first.defaultModel || (first.models || [])[0] || '' }
+            : f
+        })
+      })
+      .catch(() => {})
+  }, [])
+
+  const selectedProvider = providers.find((p) => p.provider === form.provider)
+  const models = selectedProvider?.models || []
+
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
+
+  // Ao trocar de provedor, ajusta o modelo para o padrão daquele provedor.
+  const onProviderChange = (e) => {
+    const provider = e.target.value
+    const p = providers.find((x) => x.provider === provider)
+    setForm((f) => ({ ...f, provider, model: p?.defaultModel || (p?.models || [])[0] || '' }))
+  }
 
   const handleCreate = async (e) => {
     e.preventDefault()
@@ -551,7 +706,13 @@ function AiConfigSection() {
         imageStrategy: form.imageStrategy,
       })
       setSuccess('Configuração criada.')
-      setForm({ name: '', provider: 'openai', model: '', imageStrategy: 'none' })
+      const first = providers[0]
+      setForm({
+        name: '',
+        provider: first ? first.provider : '',
+        model: first ? (first.defaultModel || (first.models || [])[0] || '') : '',
+        imageStrategy: 'unsplash',
+      })
       await load()
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Erro ao criar configuração.')
@@ -579,7 +740,7 @@ function AiConfigSection() {
         <Settings size={22} />
         <h2>Configuração de IA</h2>
       </div>
-      <p className={styles.sectionDesc}>Gerencie os perfis de IA usados para geração de postagens.</p>
+      <p className={styles.sectionDesc}>Escolha o provedor e o modelo (lista oficial da documentação) usados para gerar postagens.</p>
 
       {error && <div className={styles.error}>{error}</div>}
       {success && <div className={styles.success}>{success}</div>}
@@ -592,28 +753,39 @@ function AiConfigSection() {
           </div>
           <div className={styles.formGroup}>
             <label>Provedor</label>
-            <select className={styles.select} value={form.provider} onChange={set('provider')}>
-              <option value="openai">OpenAI</option>
-              <option value="anthropic">Anthropic</option>
-              <option value="google">Google</option>
+            <select className={styles.select} value={form.provider} onChange={onProviderChange} required>
+              {providers.length === 0 && <option value="">Carregando...</option>}
+              {providers.map((p) => (
+                <option key={p.provider} value={p.provider}>
+                  {p.label || p.provider}{p.configured === false ? ' (sem chave)' : ''}
+                </option>
+              ))}
             </select>
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.formGroup}>
             <label>Modelo</label>
-            <input className={styles.input} value={form.model} onChange={set('model')} placeholder="ex.: gpt-4o-mini" required />
+            <select className={styles.select} value={form.model} onChange={set('model')} required disabled={!models.length}>
+              {models.length === 0 && <option value="">Selecione um provedor</option>}
+              {models.map((m) => (<option key={m} value={m}>{m}</option>))}
+            </select>
           </div>
           <div className={styles.formGroup}>
             <label><ImageIcon size={14} /> Estratégia de imagem</label>
             <select className={styles.select} value={form.imageStrategy} onChange={set('imageStrategy')}>
+              <option value="unsplash">Banco de imagens (Unsplash)</option>
+              <option value="generate">Gerar com IA</option>
               <option value="none">Nenhuma</option>
-              <option value="generate">Gerar</option>
-              <option value="stock">Banco de imagens</option>
             </select>
           </div>
         </div>
-        <button type="submit" className={styles.button} disabled={submitting}>
+        {selectedProvider?.configured === false && (
+          <span className={styles.note}>
+            Atenção: o provedor &quot;{selectedProvider.label || form.provider}&quot; está sem chave de API no servidor — a geração falhará até configurá-la.
+          </span>
+        )}
+        <button type="submit" className={styles.button} disabled={submitting || !form.provider || !form.model}>
           {submitting ? <><Loader2 size={18} className={styles.spinner} /> Salvando...</> : <><Plus size={18} /> Criar configuração</>}
         </button>
       </form>
