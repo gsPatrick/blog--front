@@ -12,7 +12,7 @@ import {
   LayoutDashboard, Loader2, Lock, PenSquare, Sparkles, History,
   CheckCircle2, MessageSquare, Settings, Users as UsersIcon,
   Check, X, Send, Archive, Plus, Power, Image as ImageIcon, Pencil, Save,
-  FolderTree, Trash2, CornerDownRight,
+  FolderTree, Trash2, CornerDownRight, KeyRound,
 } from 'lucide-react'
 
 // Mapa de status -> classe de badge
@@ -647,7 +647,7 @@ function AiConfigSection() {
   const [busy, setBusy] = useState(null)
   const [submitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({
-    name: '', provider: '', model: '', imageStrategy: 'unsplash',
+    name: '', provider: '', model: '', apiKey: '', imageStrategy: 'unsplash',
   })
 
   const load = useCallback(async () => {
@@ -700,18 +700,21 @@ function AiConfigSection() {
     setSuccess('')
     setSubmitting(true)
     try {
-      await api.ai.createConfig({
+      const payload = {
         name: form.name,
         provider: form.provider,
         model: form.model,
         imageStrategy: form.imageStrategy,
-      })
+      }
+      if (form.apiKey.trim()) payload.apiKey = form.apiKey.trim()
+      await api.ai.createConfig(payload)
       setSuccess('Configuração criada.')
       const first = providers[0]
       setForm({
         name: '',
         provider: first ? first.provider : '',
         model: first ? (first.defaultModel || (first.models || [])[0] || '') : '',
+        apiKey: '',
         imageStrategy: 'unsplash',
       })
       await load()
@@ -781,11 +784,21 @@ function AiConfigSection() {
             </select>
           </div>
         </div>
-        {selectedProvider?.configured === false && (
+        <div className={styles.formGroup}>
+          <label><KeyRound size={14} /> Chave / token do provedor</label>
+          <input
+            className={styles.input}
+            type="password"
+            value={form.apiKey}
+            onChange={set('apiKey')}
+            placeholder="Cole aqui a API key do provedor"
+            autoComplete="off"
+          />
           <span className={styles.note}>
-            Atenção: o provedor &quot;{selectedProvider.label || form.provider}&quot; está sem chave de API no servidor — a geração falhará até configurá-la.
+            A chave é salva no servidor e nunca é exibida de volta. Se deixar vazio, será usada a variável de ambiente do provedor (se houver).
+            {selectedProvider?.configured === false && ' Este provedor não tem chave no ambiente — informe uma aqui.'}
           </span>
-        )}
+        </div>
         <button type="submit" className={styles.button} disabled={submitting || !form.provider || !form.model}>
           {submitting ? <><Loader2 size={18} className={styles.spinner} /> Salvando...</> : <><Plus size={18} /> Criar configuração</>}
         </button>
@@ -809,6 +822,7 @@ function AiConfigSection() {
                   <span>Provedor: {cfg.provider}</span>
                   <span>Modelo: {cfg.model}</span>
                   {cfg.imageStrategy && <span>Imagem: {cfg.imageStrategy}</span>}
+                  <span>{cfg.hasApiKey ? '🔑 token salvo' : 'sem token (usa ambiente)'}</span>
                 </div>
               </div>
               {!cfg.isActive && (
