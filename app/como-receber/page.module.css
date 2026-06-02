@@ -1,0 +1,300 @@
+.main {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hero {
+  padding: 160px 0 80px;
+  text-align: center;
+}
+
+.heroIcon {
+  width: 80px;
+  height: 80px;
+  background: var(--secondary);
+  color: var(--primary);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  box-shadow: 0 0 30px rgba(20, 184, 166, 0.3);
+}
+
+.hero h1 {
+  font-family: var(--font-space);
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--secondary);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.timelineItem {
+  position: relative;
+  padding-left: 100px;
+  margin-bottom: 80px;
+}
+
+.timelineNum {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  background: var(--secondary);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.8rem;
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.4);
+}
+
+.timelineContent h3 {
+  font-family: var(--font-space);
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.timelineContent p {
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.stepList {
+  list-style: none;
+  margin-top: 30px;
+}
+
+.stepList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.stepList li:last-child {
+  border-bottom: none;
+}
+
+.stepList li svg {
+  color: var(--accent);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.alert {
+  background: rgba(163, 230, 53, 0.05);
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.alertSecondary {
+  background: rgba(20, 184, 166, 0.05);
+  border-color: var(--secondary);
+}
+
+.alert h4 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  font-family: var(--font-space);
+}
+
+.alertSecondary h4 {
+  color: var(--secondary);
+}
+
+.associationsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.assocItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+}
+
+.simulatorSection {
+  padding: 100px 0;
+}
+
+.simulatorCard {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--primary) 100%);
+  border-radius: 40px;
+  border: 2px solid var(--accent);
+  padding: 80px 60px;
+}
+
+.simTitle {
+  text-align: center;
+  font-family: var(--font-space);
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.simDesc {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.simGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.simSubCard {
+  background: var(--surface);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.simSubCard:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent);
+}
+
+.emoji {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.simSubCard h3 {
+  color: var(--accent);
+  margin-bottom: 15px;
+  font-family: var(--font-space);
+}
+
+.simSubCard p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+}
+
+.simBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--primary);
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.simFooter {
+  margin-top: 60px;
+  text-align: center;
+  background: rgba(163, 230, 53, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px dashed var(--accent);
+}
+
+.ctaBox {
+  text-align: center;
+  background: var(--surface);
+  padding: 80px 40px;
+  border-radius: 32px;
+}
+
+.ctaBox h2 {
+  font-family: var(--font-space);
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.ctaBox p {
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 18px 36px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .timeline::before { left: 20px; }
+  .timelineItem { padding-left: 80px; }
+  .timelineNum { width: 50px; height: 50px; font-size: 1.4rem; }
+  .simulatorCard { padding: 40px 20px; }
+  .simTitle { font-size: 2rem; }
+}

@@ -1,0 +1,115 @@
+.section {
+  padding: 120px 0;
+  background: var(--background);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.title {
+  font-family: var(--font-space);
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.title span {
+  color: var(--secondary);
+}
+
+.line {
+  width: 80px;
+  height: 4px;
+  background: var(--accent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 50px 40px;
+  border-radius: 28px;
+  display: block;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  color: var(--card-text) !important;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+  background: var(--surface);
+  border-color: var(--secondary);
+}
+
+.iconWrapper {
+  width: 60px;
+  height: 60px;
+  background: rgba(163, 230, 53, 0.1);
+  color: var(--accent);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: all 0.4s ease;
+}
+
+/* Se o card estiver colorido (modo claro), o ícone fica branco */
+[data-theme="light"] .iconWrapper {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.card:hover .iconWrapper {
+  background: var(--accent);
+  color: var(--primary);
+  transform: scale(1.1) rotate(10deg);
+}
+
+.card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  font-weight: 800;
+  font-family: var(--font-space);
+}
+
+.card p {
+  color: var(--card-desc);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--card-tag-bg);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--card-text);
+}
+
+@media (max-width: 768px) {
+  .title { font-size: 2.5rem; }
+  .grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,203 @@
+.main {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hero {
+  padding: 160px 0 80px;
+  text-align: center;
+}
+
+.heroIcon {
+  width: 80px;
+  height: 80px;
+  background: var(--secondary);
+  color: var(--primary);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  box-shadow: 0 0 30px rgba(20, 184, 166, 0.3);
+}
+
+.hero h1 {
+  font-family: var(--font-space);
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--secondary);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.sectionTitle {
+  font-family: var(--font-space);
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sectionTitle span {
+  color: var(--secondary);
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  padding: 40px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--secondary);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.cardIcon {
+  width: 60px;
+  height: 60px;
+  background: var(--secondary);
+  color: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.card h3 {
+  font-family: var(--font-space);
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+}
+
+.card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.card ul {
+  list-style: none;
+}
+
+.card li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.card li:last-child {
+  border-bottom: none;
+}
+
+.card li svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.infoBox {
+  background: var(--surface);
+  border-left: 4px solid var(--secondary);
+  border-radius: 12px;
+  padding: 40px;
+}
+
+.infoBox h3 {
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: var(--font-space);
+}
+
+.infoBox p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.ctaSection {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.ctaSection h2 {
+  font-family: var(--font-space);
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.ctaSection p {
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  margin-bottom: 40px;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 20px 40px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(20, 184, 166, 0.4);
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .grid { grid-template-columns: 1fr; }
+  .ctaSection h2 { font-size: 2rem; }
+}

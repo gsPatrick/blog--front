@@ -1,0 +1,685 @@
+.main {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* Page Layout */
+.pageWrapper {
+  display: flex;
+  max-width: 1600px;
+  margin: 0 auto;
+  gap: 2rem;
+  padding: 120px 2rem 4rem;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  position: sticky;
+  top: 100px;
+  width: 280px;
+  height: fit-content;
+  background: rgba(20, 184, 166, 0.08);
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  padding: 1.5rem;
+  flex-shrink: 0;
+}
+
+.sidebar h3 {
+  font-family: var(--font-space);
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebarMenu {
+  list-style: none;
+}
+
+.sidebarMenu li {
+  margin-bottom: 0.75rem;
+}
+
+.sidebarMenu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.sidebarMenu a svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.sidebarMenu a:hover {
+  background: rgba(20, 184, 166, 0.15);
+  transform: translateX(5px);
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Hero Section */
+.heroSection {
+  text-align: center;
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+}
+
+.heroSection h1 {
+  font-family: var(--font-space);
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.heroSection .subtitle {
+  font-size: 1.3rem;
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+}
+
+.heroSection p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Disclaimer */
+.disclaimer {
+  background: linear-gradient(135deg, rgba(163, 230, 53, 0.15), rgba(20, 184, 166, 0.15));
+  border: 2px solid var(--accent);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.disclaimer::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.1) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.disclaimerContent {
+  position: relative;
+  z-index: 1;
+}
+
+.disclaimer h3 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.disclaimer p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.disclaimer strong {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+/* Section */
+.section {
+  margin-bottom: 4rem;
+  scroll-margin-top: 100px;
+}
+
+.section h2 {
+  font-family: var(--font-space);
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section h2 svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.section > p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Info Box */
+.infoBox {
+  background: rgba(20, 184, 166, 0.1);
+  border-left: 4px solid var(--secondary);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+}
+
+.infoBox h4 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.infoBox h4 svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.infoBox p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.infoBoxSecondary {
+  background: rgba(20, 184, 166, 0.1);
+  border-color: var(--secondary);
+}
+
+.infoBoxSecondary h4 {
+  color: var(--secondary);
+}
+
+.checkList {
+  list-style: none;
+  padding-left: 0;
+}
+
+.checkList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  color: var(--text-secondary);
+}
+
+.checkList li svg {
+  color: var(--accent);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Alert Box */
+.alertBox {
+  background: rgba(245, 158, 11, 0.08);
+  border: 2px solid rgba(245, 158, 11, 0.5);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.alertBox h3 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.alertBox p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.alertAccent {
+  background: rgba(163, 230, 53, 0.1);
+  border-color: var(--accent);
+}
+
+.alertAccent h3 {
+  color: var(--accent);
+}
+
+/* Process Box */
+.processBox {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.processSteps {
+  display: grid;
+  gap: 2rem;
+}
+
+.processStep {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.processNum {
+  background: var(--accent);
+  color: var(--primary);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.processStep h4 {
+  font-family: var(--font-space);
+  color: var(--text-primary);
+}
+
+.processStep p {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  line-height: 1.7;
+}
+
+/* Law Card */
+.lawCard {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+  border-left: 4px solid var(--accent);
+}
+
+.lawCard h4 {
+  font-family: var(--font-space);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lawCard h4 svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.lawDesc {
+  color: var(--text-secondary);
+  margin: 1rem 0;
+  line-height: 1.7;
+}
+
+.lawNote {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Simulator */
+.simulatorWrapper {
+  padding: 3rem;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--primary) 100%);
+  border-radius: 20px;
+  border: 2px solid var(--accent);
+}
+
+.simulatorTitle {
+  font-family: var(--font-space);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-primary);
+}
+
+.simulatorTitle svg {
+  color: var(--accent);
+}
+
+.simulatorIntro {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin: 0 auto 3rem;
+  max-width: 800px;
+}
+
+.simulatorInner {
+  background: var(--surface);
+  padding: 3rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.simulatorInnerTitle {
+  font-family: var(--font-space);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.simulatorInnerDesc {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+
+.simSegGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.simSegCard {
+  background: rgba(163, 230, 53, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+}
+
+.simSegEmoji {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.simSegCard h4 {
+  font-family: var(--font-space);
+  text-align: center;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.simSegCard p {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.simAccessWrapper {
+  text-align: center;
+}
+
+.simAccessBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 3rem;
+  background: var(--accent);
+  color: var(--primary);
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(163, 230, 53, 0.3);
+}
+
+.simAccessBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(163, 230, 53, 0.4);
+}
+
+.simWarning {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 12px;
+  border: 1px dashed #FFC107;
+}
+
+.simWarning p {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.simWarning svg {
+  color: #FFC107;
+  flex-shrink: 0;
+}
+
+/* Segments Grid */
+.segmentsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.segmentCard {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(10, 30, 53, 0.8));
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.segmentCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent));
+}
+
+.segmentCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 40px rgba(20, 184, 166, 0.3);
+}
+
+.segmentCard h3 {
+  font-family: var(--font-space);
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.segmentCard h3 svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.percentage {
+  font-family: var(--font-space);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary);
+  margin: 1rem 0;
+}
+
+.segmentCard p {
+  color: var(--text-primary);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.rulesList {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.rulesList li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.rulesList li:last-child {
+  border-bottom: none;
+}
+
+.rulesList li svg {
+  color: var(--accent);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* FAQ */
+.faqGrid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.faqItem {
+  border-left: 4px solid var(--accent);
+}
+
+.faqAnswer {
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+/* CTA */
+.ctaSection {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.ctaTitle {
+  justify-content: center;
+}
+
+.ctaText {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 1.25rem 3rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  background: var(--accent);
+  box-shadow: 0 10px 30px rgba(163, 230, 53, 0.3);
+}
+
+/* Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pageWrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageWrapper {
+    padding: 100px 1rem 3rem;
+  }
+
+  .heroSection h1 {
+    font-size: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+  }
+
+  .segmentsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .simulatorWrapper {
+    padding: 1.5rem;
+  }
+
+  .simulatorInner {
+    padding: 1.5rem;
+  }
+
+  .simulatorTitle {
+    font-size: 2rem;
+  }
+}

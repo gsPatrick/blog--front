@@ -1,0 +1,235 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid transparent;
+}
+
+.scrolled {
+  background: var(--background);
+  backdrop-filter: blur(20px);
+  height: 70px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  background: var(--secondary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  transform: rotate(-10deg);
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logoIcon {
+  transform: rotate(0deg) scale(1.1);
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  list-style: none;
+}
+
+.menu a {
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.menu a:hover {
+  color: var(--accent);
+}
+
+.themeSwitcher {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.themeBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.themeBtn:hover {
+  color: var(--text-primary);
+}
+
+.activeTheme {
+  background: var(--accent);
+  color: var(--primary) !important;
+  box-shadow: 0 4px 12px rgba(163, 230, 53, 0.3);
+}
+
+.cta {
+  background: var(--accent);
+  color: var(--primary) !important;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.3s ease !important;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(163, 230, 53, 0.4);
+}
+
+.authLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--text-primary) !important;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.authLink:hover {
+  border-color: var(--accent);
+  color: var(--accent) !important;
+}
+
+.authArea {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.userBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  max-width: 160px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.userName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logoutBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn:hover {
+  border-color: #FF6B6B;
+  color: #FF6B6B;
+}
+
+.mobileToggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+@media (max-width: 968px) {
+  .mobileToggle {
+    display: block;
+  }
+
+  .menu {
+    position: fixed;
+    top: 80px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: var(--primary);
+    flex-direction: column;
+    padding: 60px 40px;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    align-items: flex-start;
+  }
+
+  .menu.active {
+    left: 0;
+  }
+
+  .authArea {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .userBadge {
+    max-width: none;
+  }
+}

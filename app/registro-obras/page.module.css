@@ -1,0 +1,251 @@
+.main {
+  background: var(--background);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 140px 40px 80px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.comingSoon {
+  text-align: center;
+  max-width: 900px;
+}
+
+.comingSoonIcon {
+  color: var(--secondary);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.comingSoon h1 {
+  font-family: var(--font-space);
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  color: var(--secondary);
+  margin-bottom: 2rem;
+}
+
+.comingSoon > p {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 3rem;
+}
+
+.featuresPreview {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(163, 230, 53, 0.1));
+  border: 2px solid var(--secondary);
+  border-radius: 20px;
+  padding: 3rem;
+  margin: 3rem 0;
+  text-align: left;
+}
+
+.featuresPreview h2 {
+  font-family: var(--font-space);
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.featureIcon {
+  color: var(--secondary);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  display: flex;
+}
+
+.featureIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.featureContent h3 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.featureContent p {
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.notifyBox {
+  background: rgba(20, 184, 166, 0.1);
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  padding: 2.5rem;
+  margin-top: 3rem;
+}
+
+.notifyBox h3 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.notifyBox > p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.notifyForm {
+  display: flex;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.notifyForm input {
+  flex: 1;
+  min-width: 250px;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 2px solid rgba(20, 184, 166, 0.3);
+  background: rgba(246, 247, 249, 0.1);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: var(--font-inter), sans-serif;
+}
+
+.notifyForm input::placeholder {
+  color: var(--text-secondary);
+}
+
+.notifyForm input:focus {
+  outline: none;
+  border-color: var(--secondary);
+}
+
+.notifyForm button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 2.5rem;
+  border-radius: 50px;
+  border: none;
+  background: var(--accent);
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-space);
+}
+
+.notifyForm button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(163, 230, 53, 0.4);
+}
+
+.notifySuccess {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.notifyInfo {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 1.25rem 3rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  background: var(--accent);
+  box-shadow: 0 10px 30px rgba(163, 230, 53, 0.3);
+}
+
+@media (max-width: 768px) {
+  .comingSoon h1 {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .comingSoonIcon svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .notifyForm {
+    flex-direction: column;
+  }
+
+  .notifyForm input,
+  .notifyForm button {
+    width: 100%;
+    justify-content: center;
+  }
+}

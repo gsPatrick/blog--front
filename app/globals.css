@@ -1,0 +1,84 @@
+:root {
+  /* Paleta Figa Premium */
+  --primary: #0A1E35;
+  --secondary: #14B8A6;
+  --accent: #A3E635;
+  --background: #0F1419;
+  --surface: #151d29;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --border: rgba(255, 255, 255, 0.08);
+  
+  /* Card Theme Defaults (Dark/Figa) */
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-text: #F8FAFC;
+  --card-desc: #94A3B8;
+  --card-tag-bg: rgba(255, 255, 255, 0.05);
+  
+  /* Gradientes Cinematográficos */
+  --grad-primary: linear-gradient(135deg, var(--primary) 0%, #142e4d 100%);
+  --grad-glow: radial-gradient(circle at center, rgba(163, 230, 53, 0.1) 0%, transparent 70%);
+}
+
+[data-theme="light"] {
+  --primary: #0A1E35;
+  --secondary: #0D9488;
+  --accent: #65A30D;
+  --background: #FFFFFF;
+  --surface: #F1F5F9;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --border: #E2E8F0;
+
+  /* Card Theme (Light - Colored) */
+  --card-bg: var(--secondary);
+  --card-text: #FFFFFF;
+  --card-desc: rgba(255, 255, 255, 0.9);
+  --card-tag-bg: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] {
+  --background: #000000;
+  --surface: #0a0a0a;
+  --border: #1a1a1a;
+  --card-bg: #111111;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-inter), sans-serif;
+  background: var(--background);
+  color: var(--text-primary);
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Scrollbar Customizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}

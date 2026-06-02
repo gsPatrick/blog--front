@@ -1,0 +1,563 @@
+.main {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* Page Layout */
+.pageWrapper {
+  display: flex;
+  max-width: 1600px;
+  margin: 0 auto;
+  gap: 2rem;
+  padding: 2rem;
+  padding-top: 120px;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  position: sticky;
+  top: 100px;
+  width: 280px;
+  height: fit-content;
+  background: rgba(20, 184, 166, 0.1);
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  padding: 1.5rem;
+  flex-shrink: 0;
+}
+
+.sidebar h3 {
+  font-family: var(--font-space);
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebarMenu {
+  list-style: none;
+}
+
+.sidebarMenu li {
+  margin-bottom: 0.75rem;
+}
+
+.sidebarMenu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.sidebarMenu a svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.sidebarMenu a:hover {
+  background: rgba(20, 184, 166, 0.2);
+  transform: translateX(5px);
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Hero Section */
+.heroSection {
+  text-align: center;
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+}
+
+.heroSection h1 {
+  font-family: var(--font-space);
+  font-size: 3rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+}
+
+.heroSection p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  color: var(--text-secondary);
+}
+
+/* Disclaimer */
+.disclaimer {
+  background: linear-gradient(135deg, rgba(163, 230, 53, 0.15), rgba(20, 184, 166, 0.15));
+  border: 2px solid var(--accent);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.disclaimer::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.1) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.disclaimerContent {
+  position: relative;
+  z-index: 1;
+}
+
+.disclaimer h3 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.disclaimer p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.disclaimer strong {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+/* Section */
+.section {
+  margin-bottom: 4rem;
+  scroll-margin-top: 100px;
+}
+
+.section h2 {
+  font-family: var(--font-space);
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section h2 svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.section > p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+}
+
+/* Simulator Card */
+.simulatorCard {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(10, 30, 53, 0.8));
+  border: 2px solid var(--secondary);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.simulatorHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.simulatorHeader h3 {
+  font-family: var(--font-space);
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.simulatorHeader p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.simulatorForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  color: var(--secondary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.formGroup input,
+.formGroup select {
+  background: rgba(246, 247, 249, 0.1);
+  border: 2px solid rgba(20, 184, 166, 0.3);
+  color: var(--text-primary);
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: var(--font-inter), sans-serif;
+  transition: all 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: var(--secondary);
+  background: rgba(246, 247, 249, 0.15);
+}
+
+.formGroup select option {
+  background: var(--primary);
+  color: var(--text-primary);
+}
+
+.help {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.infoSegmento {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(163, 230, 53, 0.1);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+}
+
+.infoSegmento p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.calculateButton {
+  background: var(--accent);
+  color: var(--primary);
+  padding: 1.25rem 3rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 2rem auto 0;
+  font-family: var(--font-space);
+}
+
+.calculateButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(163, 230, 53, 0.4);
+}
+
+.resultsPanel {
+  background: rgba(163, 230, 53, 0.1);
+  border: 2px solid var(--accent);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.active {
+  animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resultsTitle {
+  font-family: var(--font-space);
+  color: var(--accent);
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.resultsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.resultItem {
+  background: rgba(10, 30, 53, 0.5);
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(20, 184, 166, 0.3);
+}
+
+.resultItem .label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.resultItem .value {
+  color: var(--accent);
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: var(--font-space);
+}
+
+.resultSubtitle {
+  color: var(--secondary);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.resultsNote {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Segments Grid */
+.segmentsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.segmentCard {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(10, 30, 53, 0.8));
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.segmentCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent));
+}
+
+.segmentCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 40px rgba(20, 184, 166, 0.3);
+}
+
+.segmentCard h3 {
+  font-family: var(--font-space);
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.segmentCard h3 svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.percentage {
+  font-family: var(--font-space);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary);
+  margin: 1rem 0;
+}
+
+.segmentCard p {
+  color: var(--text-primary);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.rulesList {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.rulesList li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.rulesList li:last-child {
+  border-bottom: none;
+}
+
+.rulesList li svg {
+  color: var(--accent);
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+/* Info Box */
+.infoBox {
+  background: rgba(20, 184, 166, 0.1);
+  border-left: 4px solid var(--secondary);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+}
+
+.infoBox h4 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.infoBox p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* CTA Section */
+.ctaSection {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.ctaTitle {
+  justify-content: center;
+}
+
+.ctaText {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.ctaButton {
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 1.25rem 3rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  background: var(--accent);
+  box-shadow: 0 10px 30px rgba(163, 230, 53, 0.3);
+}
+
+/* Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pageWrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection h1 {
+    font-size: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+  }
+
+  .segmentsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .simulatorForm {
+    grid-template-columns: 1fr;
+  }
+}

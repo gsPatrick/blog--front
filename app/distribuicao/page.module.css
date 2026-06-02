@@ -1,0 +1,609 @@
+.main {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* Page Layout */
+.pageWrapper {
+  display: flex;
+  max-width: 1600px;
+  margin: 0 auto;
+  gap: 2rem;
+  padding: 120px 2rem 2rem;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  position: sticky;
+  top: 100px;
+  width: 300px;
+  height: fit-content;
+  background: rgba(20, 184, 166, 0.1);
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  padding: 1.5rem;
+  flex-shrink: 0;
+}
+
+.sidebar h3 {
+  font-family: var(--font-space);
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebarMenu {
+  list-style: none;
+}
+
+.sidebarMenu li {
+  margin-bottom: 0.75rem;
+}
+
+.sidebarMenu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.sidebarMenu a svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.sidebarMenu a:hover {
+  background: rgba(20, 184, 166, 0.2);
+  transform: translateX(5px);
+}
+
+.sidebarMenu a.active {
+  background: rgba(163, 230, 53, 0.15);
+  border-left: 3px solid var(--accent);
+  color: var(--accent);
+}
+
+.sidebarMenu a.active svg {
+  color: var(--accent);
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Hero Section */
+.heroSection {
+  text-align: center;
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+}
+
+.heroSection h1 {
+  font-family: var(--font-space);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.heroSection h1 span {
+  color: var(--accent);
+}
+
+.heroSection .subtitle {
+  font-size: 1.3rem;
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+}
+
+.heroSection p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  color: var(--text-secondary);
+}
+
+/* Section */
+.section {
+  margin-bottom: 4rem;
+  scroll-margin-top: 100px;
+}
+
+.section h2 {
+  font-family: var(--font-space);
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section h2 svg {
+  color: var(--secondary);
+}
+
+.section > p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--secondary), var(--accent));
+}
+
+.timelineItem {
+  position: relative;
+  padding-left: 80px;
+  margin-bottom: 3rem;
+}
+
+.timelineNumber {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-space);
+  box-shadow: 0 5px 20px rgba(20, 184, 166, 0.4);
+}
+
+.timelineContent {
+  background: rgba(20, 184, 166, 0.1);
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.timelineContent:hover {
+  transform: translateX(10px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(20, 184, 166, 0.2);
+}
+
+.timelineContent h3 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.timelineContent p {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Cards Grid */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.infoCard {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(10, 30, 53, 0.8));
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.infoCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent));
+}
+
+.infoCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 40px rgba(20, 184, 166, 0.3);
+}
+
+.infoCard h3 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.infoCard h3 svg {
+  width: 2rem;
+  height: 2rem;
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.percentage {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary);
+  margin: 1rem 0;
+  font-family: var(--font-space);
+}
+
+.infoCard p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.codeExample {
+  margin-top: 1rem;
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  color: var(--accent) !important;
+}
+
+.infoCard ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.infoCard ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+  color: var(--text-primary);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.infoCard ul li:last-child {
+  border-bottom: none;
+}
+
+.infoCard ul li svg {
+  color: var(--accent);
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+/* Comparison Table */
+.comparisonTable {
+  background: rgba(20, 184, 166, 0.05);
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.comparisonTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparisonTable th {
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  color: var(--primary);
+  padding: 1.25rem;
+  text-align: left;
+  font-weight: 700;
+  font-family: var(--font-space);
+}
+
+.comparisonTable td {
+  padding: 1.25rem;
+  border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+  color: var(--text-primary);
+}
+
+.comparisonTable tr:last-child td {
+  border-bottom: none;
+}
+
+.comparisonTable tbody tr:hover {
+  background: rgba(20, 184, 166, 0.1);
+}
+
+/* Info Box */
+.infoBox {
+  background: rgba(20, 184, 166, 0.1);
+  border-left: 4px solid var(--secondary);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+}
+
+.infoBox h4 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.infoBox p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.infoBox.warning {
+  border-left-color: #FFA500;
+  background: rgba(255, 165, 0, 0.1);
+}
+
+.infoBox.warning h4 {
+  color: #FFA500;
+}
+
+/* Distribution Visual */
+.distributionVisual {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(10, 30, 53, 0.8));
+  border: 2px solid var(--secondary);
+  border-radius: 20px;
+  padding: 3rem;
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.visualTitle {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.visualCaption {
+  color: var(--text-secondary);
+  margin-top: 2rem;
+}
+
+.distributionChart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.chartGroup {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.chartItem {
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.chartItem:hover {
+  transform: scale(1.1);
+}
+
+.chartArrow {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.chartCircle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-space);
+  margin: 0 auto 1rem;
+  position: relative;
+}
+
+.chartCircle::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.3;
+  z-index: -1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.chartGroup:nth-child(1) .chartCircle {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+}
+
+.chartGroup:nth-child(2) .chartCircle {
+  background: linear-gradient(135deg, #4ECDC4, #95E1D3);
+}
+
+.chartGroup:nth-child(3) .chartCircle {
+  background: linear-gradient(135deg, #FFE66D, #FFED4E);
+}
+
+.chartGroup:nth-child(4) .chartCircle {
+  background: linear-gradient(135deg, #A8E6CF, #C7EADA);
+}
+
+.chartLabel {
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Systems Section */
+.systemsSection {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(163, 230, 53, 0.05));
+  padding: 4rem 2rem;
+  border-radius: 20px;
+  margin-top: 5rem;
+}
+
+.centeredIntro {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  font-size: 1.15rem;
+}
+
+.missionBox {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.missionBox h3 {
+  font-family: var(--font-space);
+  color: var(--accent);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.missionBox p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.accentText {
+  color: var(--accent);
+}
+
+.secondaryText {
+  color: var(--secondary);
+}
+
+/* CTA Section */
+.ctaSection {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.ctaTitle {
+  justify-content: center;
+}
+
+.ctaText {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.ctaButton {
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 1.25rem 3rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  background: var(--accent);
+  box-shadow: 0 10px 30px rgba(163, 230, 53, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pageWrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection h1 {
+    font-size: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+  }
+
+  .timeline::before {
+    left: 15px;
+  }
+
+  .timelineNumber {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  .timelineItem {
+    padding-left: 70px;
+  }
+
+  .distributionChart {
+    flex-direction: column;
+  }
+
+  .chartGroup {
+    flex-direction: column;
+  }
+
+  .chartArrow {
+    transform: rotate(90deg);
+  }
+}
