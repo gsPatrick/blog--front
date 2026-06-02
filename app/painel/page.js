@@ -12,6 +12,7 @@ import {
   LayoutDashboard, Loader2, Lock, PenSquare, Sparkles, History,
   CheckCircle2, MessageSquare, Settings, Users as UsersIcon,
   Check, X, Send, Archive, Plus, Power, Image as ImageIcon, Pencil, Save,
+  FolderTree, Trash2, CornerDownRight,
 } from 'lucide-react'
 
 // Mapa de status -> classe de badge
@@ -975,6 +976,157 @@ function UsersSection() {
 }
 
 // ---------------------------------------------------------------------------
+// SEÇÃO: Categorias e subcategorias (editor/admin)
+// ---------------------------------------------------------------------------
+function CategoriesSection() {
+  const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+  const [busy, setBusy] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [form, setForm] = useState({ name: '', parentId: '', label: '', icon: '' })
+
+  const load = useCallback(async () => {
+    setLoading(true)
+    setError('')
+    try {
+      const data = await api.categories.list()
+      setCategories(Array.isArray(data) ? data : (data?.data || []))
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'Erro ao carregar categorias.')
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => { load() }, [load])
+
+  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
+
+  const roots = categories.filter((c) => !c.parentId)
+  const childrenOf = (id) => categories.filter((c) => c.parentId === id)
+
+  const handleCreate = async (e) => {
+    e.preventDefault()
+    setError('')
+    setSuccess('')
+    setSubmitting(true)
+    try {
+      const payload = { name: form.name }
+      if (form.parentId) payload.parentId = form.parentId
+      if (form.label) payload.label = form.label
+      if (form.icon) payload.icon = form.icon
+      await api.categories.create(payload)
+      setSuccess(form.parentId ? 'Subcategoria criada.' : 'Categoria criada.')
+      setForm({ name: '', parentId: '', label: '', icon: '' })
+      await load()
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'Erro ao criar categoria.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const remove = async (id) => {
+    if (!window.confirm('Remover esta categoria? Subcategorias viram raiz e as postagens ficam sem categoria.')) return
+    setBusy(id)
+    setError('')
+    try {
+      await api.categories.remove(id)
+      await load()
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'Erro ao remover.')
+    } finally {
+      setBusy(null)
+    }
+  }
+
+  const renderItem = (c, isChild) => (
+    <div key={c.id} className={styles.item} style={isChild ? { marginLeft: 28 } : undefined}>
+      <div className={styles.itemMain}>
+        <h4>
+          {isChild && <CornerDownRight size={15} style={{ marginRight: 6, color: 'var(--text-secondary)' }} />}
+          {c.name}
+          {' '}
+          {!isChild && <span className={styles.roleBadge}>{childrenOf(c.id).length} sub</span>}
+        </h4>
+        <div className={styles.itemMeta}>
+          <span>/{c.slug}</span>
+          {typeof c.postsCount !== 'undefined' && <span>{c.postsCount} posts</span>}
+          {c.label && <span>{c.label}</span>}
+        </div>
+      </div>
+      <button
+        className={`${styles.button} ${styles.buttonDanger} ${styles.btnSm}`}
+        disabled={busy === c.id}
+        onClick={() => remove(c.id)}
+      >
+        <Trash2 size={15} /> Remover
+      </button>
+    </div>
+  )
+
+  return (
+    <div className={styles.section}>
+      <div className={styles.sectionHead}>
+        <FolderTree size={22} />
+        <h2>Categorias</h2>
+      </div>
+      <p className={styles.sectionDesc}>Crie categorias e subcategorias (1 nível). Deixe &quot;Categoria pai&quot; vazio para uma categoria raiz.</p>
+
+      {error && <div className={styles.error}>{error}</div>}
+      {success && <div className={styles.success}>{success}</div>}
+
+      <form className={styles.form} onSubmit={handleCreate}>
+        <div className={styles.row}>
+          <div className={styles.formGroup}>
+            <label>Nome</label>
+            <input className={styles.input} value={form.name} onChange={set('name')} required />
+          </div>
+          <div className={styles.formGroup}>
+            <label>Categoria pai (opcional → subcategoria)</label>
+            <select className={styles.select} value={form.parentId} onChange={set('parentId')}>
+              <option value="">— categoria raiz —</option>
+              {roots.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))}
+            </select>
+          </div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.formGroup}>
+            <label>Rótulo exibido (opcional)</label>
+            <input className={styles.input} value={form.label} onChange={set('label')} placeholder="Ex.: 🤖 IA & Direitos" />
+          </div>
+          <div className={styles.formGroup}>
+            <label>Ícone (opcional)</label>
+            <input className={styles.input} value={form.icon} onChange={set('icon')} placeholder="Ex.: Bot" />
+          </div>
+        </div>
+        <button type="submit" className={styles.button} disabled={submitting}>
+          {submitting ? <><Loader2 size={18} className={styles.spinner} /> Salvando...</> : <><Plus size={18} /> Criar categoria</>}
+        </button>
+      </form>
+
+      <h3 style={{ margin: '28px 0 14px', fontSize: '1.1rem' }}>Categorias existentes</h3>
+      {loading ? (
+        <p className={styles.inlineLoading}><Loader2 size={16} className={styles.spinner} /> Carregando...</p>
+      ) : roots.length === 0 ? (
+        <p className={styles.empty}>Nenhuma categoria cadastrada.</p>
+      ) : (
+        <div className={styles.list}>
+          {roots.map((root) => (
+            <div key={root.id}>
+              {renderItem(root, false)}
+              {childrenOf(root.id).map((child) => renderItem(child, true))}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
 // PÁGINA
 // ---------------------------------------------------------------------------
 export default function Painel() {
@@ -996,6 +1148,7 @@ export default function Painel() {
   }
   if (hasRole('editor', 'admin')) {
     tabs.push({ key: 'review', label: 'Revisão & publicação', icon: <CheckCircle2 size={17} /> })
+    tabs.push({ key: 'categories', label: 'Categorias', icon: <FolderTree size={17} /> })
     tabs.push({ key: 'comments', label: 'Moderação', icon: <MessageSquare size={17} /> })
   }
   if (hasRole('admin')) {
@@ -1083,6 +1236,7 @@ export default function Painel() {
             {current === 'ai' && <GenerateAiSection />}
             {current === 'generations' && <GenerationsSection />}
             {current === 'review' && <ReviewSection />}
+            {current === 'categories' && <CategoriesSection />}
             {current === 'comments' && <CommentsModerationSection />}
             {current === 'aiconfig' && <AiConfigSection />}
             {current === 'users' && <UsersSection />}

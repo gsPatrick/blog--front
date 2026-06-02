@@ -8,7 +8,7 @@ import Navbar from '@/components/Navbar/Navbar'
 import FigaIcon from '@/components/FigaIcon/FigaIcon'
 import { useAuth } from '@/context/AuthContext'
 import styles from './page.module.css'
-import { LogIn, Mail, Lock, Loader2, Info, ShieldCheck, Sparkles, MessageSquare } from 'lucide-react'
+import { LogIn, Mail, Lock, Loader2, ShieldCheck, Sparkles, MessageSquare } from 'lucide-react'
 
 export default function Login() {
   const router = useRouter()
@@ -54,21 +54,10 @@ export default function Login() {
             <p className={styles.brandTagline}>Proteção inteligente de direitos musicais.</p>
 
             <ul className={styles.brandList}>
-              <li><ShieldCheck size={18} /> Gerencie conteúdo com segurança</li>
-              <li><Sparkles size={18} /> Crie postagens com inteligência artificial</li>
-              <li><MessageSquare size={18} /> Curta e comente nos artigos</li>
+              <li><ShieldCheck size={18} /> Acesso único e seguro ao sistema</li>
+              <li><Sparkles size={18} /> Tecnologia e dados para o mercado musical</li>
+              <li><MessageSquare size={18} /> Acompanhe, curta e comente os artigos</li>
             </ul>
-
-            <div className={styles.hintBox}>
-              <h4><Info size={16} /> Logins de teste</h4>
-              <p>Senha para todos: <strong>admin</strong></p>
-              <ul>
-                <li>admin@admin.com <span>(admin)</span></li>
-                <li>editor@admin.com <span>(editor)</span></li>
-                <li>redator@admin.com <span>(redator)</span></li>
-                <li>leitor@admin.com <span>(leitor)</span></li>
-              </ul>
-            </div>
           </motion.div>
         </aside>
 

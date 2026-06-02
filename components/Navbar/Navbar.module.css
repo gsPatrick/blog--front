@@ -201,7 +201,11 @@
   cursor: pointer;
 }
 
-@media (max-width: 968px) {
+@media (max-width: 1100px) {
+  .container {
+    padding: 0 20px;
+  }
+
   .mobileToggle {
     display: block;
   }
@@ -210,11 +214,14 @@
     position: fixed;
     top: 80px;
     left: -100%;
-    width: 100%;
+    width: min(360px, 85vw);
     height: calc(100vh - 80px);
     background: var(--primary);
     flex-direction: column;
-    padding: 60px 40px;
+    padding: 36px 32px;
+    gap: 22px;
+    overflow-y: auto;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.3);
     transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     align-items: flex-start;
   }
