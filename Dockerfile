@@ -13,6 +13,9 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Garante que a pasta public exista mesmo que vazia (git não versiona dir vazio),
+# evitando falha no COPY do estágio final.
+RUN mkdir -p public
 ENV NEXT_TELEMETRY_DISABLED=1
 # URL da API embutida no build (NEXT_PUBLIC_* é resolvido em tempo de build).
 # Pode ser sobrescrita no build: --build-arg NEXT_PUBLIC_API_URL=...
